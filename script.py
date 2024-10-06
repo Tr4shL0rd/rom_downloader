@@ -33,5 +33,16 @@ def download_file(files:str, directory:str):
         command_str = f"wget -O {DIST}{directory}{file} {URL}/{directory}{file}".split(" ")
         subprocess.run(command_str)
 
+def dir_choice(directories: list[str]) -> int:
+    """asss"""
+    menu = {}
+    for _i, dir in enumerate(directories, 1):
+        menu[_i] = dir
+        print(f"{_i} | {dir}")
+    
+    choice = int(input("Select a directory by number: "))
+    return choice-1
+
+choice = dir_choice(get_dirs())
 #print(get_dirs())
-download_file(files=get_dir_files(get_dirs()[3]), directory=get_dirs()[3])
+download_file(files=get_dir_files(get_dirs()[choice]), directory=get_dirs()[choice])
