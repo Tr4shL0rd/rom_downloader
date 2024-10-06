@@ -10,7 +10,7 @@ SERVER = os.getenv("SERVER_IP")
 PORT = os.getenv("SERVER_PORT")
 URL = f"http://{SERVER}:{PORT}"
 
-DIST = "RetroPie/roms"
+DIST = "RetroPie/roms/"
 
 def get_dirs() -> list[str]:
     """returns only dirs from SERVER"""
@@ -31,7 +31,6 @@ def download_file(files:str, directory:str):
     for _i,file in enumerate(files,0):
         command_str = f"wget -O {DIST}{directory}{file} {URL}/{directory}{file}".split(" ")
         subprocess.run(command_str)
-        print(command_str)
 
 #print(get_dirs())
 download_file(files=get_dir_files(get_dirs()[3]), directory=get_dirs()[3])
