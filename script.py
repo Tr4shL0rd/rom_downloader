@@ -1,9 +1,9 @@
+from __future__ import annotations
 """asd"""
 import os
 from bs4 import BeautifulSoup
 import requests
 import subprocess
-from __future__ import annotations
 from dotenv import load_dotenv
 load_dotenv()
 
