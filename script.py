@@ -43,7 +43,7 @@ def download_file(files:list[str], directory:str):
     for _i, file in enumerate(files,0):
         command_str = f"wget -q -O {DIST}{directory}{file} {URL}/{directory}{file}".split(" ")
         if not DEBUG:
-            print(f"[{_i}/{len(directory)}", end="\r")
+            print(f"[{_i}/{len(directory)}]", end="\r")
             subprocess.run(command_str)
         else:
             print(command_str)
@@ -73,9 +73,11 @@ if __name__ == "__main__":
     try:
         if not os.path.exists(DIST):
             print(f"[WARNING] Path \"{DIST}\" not found!")
-            if input("continue? [y/N] ").lower() == "n":
+            continued = input("continue? [y/N] ").lower() or "n"
+            if continued == "n":
                 exit()
-        clear(10)
+        if continued == "y":
+            clear(10)
         INFO()
         main()
     except KeyboardInterrupt:
