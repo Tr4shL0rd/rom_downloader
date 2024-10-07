@@ -18,6 +18,7 @@ def clear(n:int) -> None:
     print("\n"*n)
 
 def INFO():
+    """displays server info"""
     print("||==========================")
     print(f"||SERVER ADDRESS: {SERVER}")
     print(f"||SERVER PORT   : {PORT}")
@@ -83,4 +84,3 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         print("\n")
         exit()
-
