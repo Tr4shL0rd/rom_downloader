@@ -13,6 +13,17 @@ URL = f"http://{SERVER}:{PORT}"
 DIST = "RetroPie/roms/"
 DEBUG = not True
 
+def clear(n:int) -> None:
+    """clears screen by `n` (`int`) lines"""
+    print("\n"*n)
+
+def INFO():
+    print("||==========================")
+    print(f"||SERVER ADDRESS: {SERVER}")
+    print(f"||SERVER PORT   : {PORT}")
+    print(f"||URL           : {URL}")
+    print("||==========================\n")
+    
 def get_dirs() -> list[str]:
     """returns only dirs from SERVER"""
     _r = requests.get(URL, timeout=3)
@@ -32,7 +43,7 @@ def download_file(files:str, directory:str):
     for file in files:
         command_str = f"wget -O {DIST}{directory}{file} {URL}/{directory}{file}".split(" ")
         if not DEBUG:
-            subprocess.run(command_str, check=True)
+            subprocess.run(command_str)
         else:
             print(command_str)
 
@@ -46,14 +57,25 @@ def dir_choice(directories: list[str]) -> int:
     _choice = int(input("Select a directory by number: ")) or None
     return None if isinstance(_choice, type(None)) else _choice-1
 
+
 def main():
     """main"""
     dirs = get_dirs()
     choice = dir_choice(dirs)
+    if choice <= len(dirs):
+        print(f"show files in \"{get_dirs()[choice].replace('/','')}\"?", end="")
+        if input(" [y/N] ").lower() == "y":
+            print(get_dir_files(get_dirs()[choice]))
     download_file(files=get_dir_files(get_dirs()[choice]), directory=get_dirs()[choice])
 
 if __name__ == "__main__":
     try:
+        if not os.path.exists(DIST):
+            print(f"[WARNING] Path \"{DIST}\" not found!")
+            if input("continue? [y/N] ").lower() == "n":
+                exit()
+        clear(10)
+        INFO()
         main()
     except KeyboardInterrupt:
         exit()
