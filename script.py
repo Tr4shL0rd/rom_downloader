@@ -1,5 +1,4 @@
 from __future__ import annotations
-"""asd"""
 import os
 from bs4 import BeautifulSoup
 import requests
@@ -12,6 +11,7 @@ PORT = os.getenv("SERVER_PORT")
 URL = f"http://{SERVER}:{PORT}"
 
 DIST = "RetroPie/roms/"
+DEBUG = not True
 
 def get_dirs() -> list[str]:
     """returns only dirs from SERVER"""
@@ -28,21 +28,32 @@ def get_dir_files(dir_url:str) -> list[str]:
     return _files
 
 def download_file(files:str, directory:str):
-    """asd"""
-    for _i,file in enumerate(files,0):
+    """downloads file from dir"""
+    for file in files:
         command_str = f"wget -O {DIST}{directory}{file} {URL}/{directory}{file}".split(" ")
-        subprocess.run(command_str)
+        if not DEBUG:
+            subprocess.run(command_str, check=True)
+        else:
+            print(command_str)
 
 def dir_choice(directories: list[str]) -> int:
-    """asss"""
+    """dir selection"""
     menu = {}
-    for _i, dir in enumerate(directories, 1):
-        menu[_i] = dir
-        print(f"{_i} | {dir}")
-    
-    choice = int(input("Select a directory by number: "))
-    return choice-1
+    for _i, _dir in enumerate(directories, 1):
+        menu[_i] = _dir
+        print(f"[{_i}]| {_dir}")
 
-choice = dir_choice(get_dirs())
-#print(get_dirs())
-download_file(files=get_dir_files(get_dirs()[choice]), directory=get_dirs()[choice])
+    _choice = int(input("Select a directory by number: ")) or None
+    return None if isinstance(_choice, type(None)) else _choice-1
+
+def main():
+    """main"""
+    dirs = get_dirs()
+    choice = dir_choice(dirs)
+    download_file(files=get_dir_files(get_dirs()[choice]), directory=get_dirs()[choice])
+
+if __name__ == "__main__":
+    try:
+        main()
+    except KeyboardInterrupt:
+        exit()
