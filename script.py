@@ -76,9 +76,10 @@ if __name__ == "__main__":
             continued = input("continue? [y/N] ").lower() or "n"
             if continued == "n":
                 exit()
-        if continued == "y":
-            clear(10)
+            else:
+                clear(10)
         INFO()
         main()
     except KeyboardInterrupt:
         exit()
+
