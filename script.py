@@ -81,5 +81,6 @@ if __name__ == "__main__":
         INFO()
         main()
     except KeyboardInterrupt:
+        print("\n")
         exit()
 
