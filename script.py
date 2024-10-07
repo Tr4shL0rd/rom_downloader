@@ -38,13 +38,13 @@ def get_dir_files(dir_url:str) -> list[str]:
     _files = [a['href'] for a in _soup.find_all('a', href=True) if not a['href'].endswith('/')]
     return _files
 
-def download_file(files:str, directory:str):
+def download_file(files:list[str], directory:str):
     """downloads file from dir"""
     for _i, file in enumerate(files,0):
         command_str = f"wget -q -O {DIST}{directory}{file} {URL}/{directory}{file}".split(" ")
         if not DEBUG:
+            print(f"[{_i}/{len(directory)}", end="\r")
             subprocess.run(command_str)
-            print(_i)
         else:
             print(command_str)
 
