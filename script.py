@@ -40,10 +40,11 @@ def get_dir_files(dir_url:str) -> list[str]:
 
 def download_file(files:str, directory:str):
     """downloads file from dir"""
-    for file in files:
-        command_str = f"wget -O {DIST}{directory}{file} {URL}/{directory}{file}".split(" ")
+    for _i, file in enumerate(files,0):
+        command_str = f"wget -q -O {DIST}{directory}{file} {URL}/{directory}{file}".split(" ")
         if not DEBUG:
             subprocess.run(command_str)
+            print(_i)
         else:
             print(command_str)
 
