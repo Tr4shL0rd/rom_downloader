@@ -1,5 +1,7 @@
 from __future__ import annotations
 import os
+import pathlib
+import zipfile
 import subprocess
 from bs4 import BeautifulSoup
 import requests
@@ -57,17 +59,28 @@ def download_file(files:list[str], directory:str):
 def dir_choice(directories: list[str]) -> int:
     """dir selection"""
     menu = {}
-    for _i, _dir in enumerate(directories, 1):
-        menu[_i] = _dir
-        print(f"[{_i}]| {_dir}")
+    for index, _dir in enumerate(directories, 1):
+        menu[index] = _dir
+        print(f"[{index}]| {_dir}")
 
     _choice = int(input("Select a directory by number: ")) or None
+    if _choice >= index or _choice <= 1:
+        print(f"please select a valid number between 1 and {index}")
+        dir_choice(directories)
     return None if isinstance(_choice, type(None)) else _choice-1
+
+def unzip_rom_file(file:str, dist:str):
+    """unzips `file` (`str`) to `dist` (`str`)"""
+    here = pathlib.Path(__name__).parent.resolve()
+    with zipfile.ZipFile("Contra (USA).zip", "r") as zip_file:
+        zip_file.extractall(here)
 
 
 def main():
     """main"""
     dirs = get_dirs()
+    dirs.pop(dirs.index("zipped_roms/"))
+
     choice = dir_choice(dirs)
     if choice <= len(dirs):
         print(f"show files in \"{get_dirs()[choice].replace('/','')}\"?", end="")
@@ -93,5 +106,5 @@ if __name__ == "__main__":
         print(f"could not connect to \"{e.request.url}\"")
     except FileNotFoundError:
         print("path not found.\nexiting...")
-    finally:
-        exit()
+    #finally:
+    #    exit()
