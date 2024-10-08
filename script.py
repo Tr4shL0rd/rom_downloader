@@ -1,8 +1,8 @@
 from __future__ import annotations
 import os
+import subprocess
 from bs4 import BeautifulSoup
 import requests
-import subprocess
 from dotenv import load_dotenv
 load_dotenv()
 
