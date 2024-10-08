@@ -70,11 +70,14 @@ def dir_choice(directories: list[str]) -> int:
     return None if isinstance(_choice, type(None)) else _choice-1
 
 def unzip_rom_file(file:str, dist:str):
-    """unzips `file` (`str`) to `dist` (`str`)"""
+    """
+    unzips `file` (`str`) to `dist` (`str`)
+    * note: `dist` also means the console that the rom file is for
+    """
     #                   __file__
-    here = pathlib.Path(__name__).parent.resolve()
-    with zipfile.ZipFile("Contra (USA).zip", "r") as zip_file:
-        zip_file.extractall(here)
+    #here = pathlib.Path(__name__).parent.resolve()
+    with zipfile.ZipFile(file, "r") as zip_file:
+        zip_file.extractall(dist)
 
 
 def main():
