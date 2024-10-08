@@ -13,6 +13,10 @@ URL = f"http://{SERVER}:{PORT}"
 DIST = "RetroPie/roms/"
 DEBUG = not True
 
+def test_connect():
+    _r = requests.get(URL, timeout=3)
+    return _r.status_code
+
 def clear(n:int) -> None:
     """clears screen by `n` (`int`) lines"""
     print("\n"*n)
@@ -72,6 +76,7 @@ def main():
 
 if __name__ == "__main__":
     try:
+        test_connect()
         if not os.path.exists(DIST):
             print(f"[WARNING] Path \"{DIST}\" not found!")
             continued = input("continue? [y/N] ").lower() or "n"
@@ -83,4 +88,7 @@ if __name__ == "__main__":
         main()
     except KeyboardInterrupt:
         print("\n")
+        exit()
+    except requests.exceptions.ConnectionError as e:
+        print(f"could not connect to \"{e.request.url}\"")
         exit()
