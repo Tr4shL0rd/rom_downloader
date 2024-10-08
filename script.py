@@ -22,7 +22,7 @@ def clear(n:int) -> None:
     """clears screen by `n` (`int`) lines"""
     print("\n"*n)
 
-def INFO():
+def server_info():
     """displays server info"""
     print("||==========================")
     print(f"||SERVER ADDRESS: {SERVER}")
@@ -85,7 +85,7 @@ if __name__ == "__main__":
                 raise FileNotFoundError
             else:
                 clear(10)
-        INFO()
+        server_info()
         main()
     except KeyboardInterrupt:
         print("\n")
