@@ -81,14 +81,16 @@ if __name__ == "__main__":
             print(f"[WARNING] Path \"{DIST}\" not found!")
             continued = input("continue? [y/N] ").lower() or "n"
             if continued == "n":
-                exit()
+                raise FileNotFoundError
             else:
                 clear(10)
         INFO()
         main()
     except KeyboardInterrupt:
         print("\n")
-        exit()
     except requests.exceptions.ConnectionError as e:
         print(f"could not connect to \"{e.request.url}\"")
+    except FileNotFoundError:
+        print("path not found.\nexiting...")
+    finally:
         exit()
