@@ -14,6 +14,7 @@ DIST = "RetroPie/roms/"
 DEBUG = not True
 
 def test_connect():
+    """tests connection"""
     _r = requests.get(URL, timeout=3)
     return _r.status_code
 
