@@ -71,6 +71,7 @@ def dir_choice(directories: list[str]) -> int:
 
 def unzip_rom_file(file:str, dist:str):
     """unzips `file` (`str`) to `dist` (`str`)"""
+    #                   __file__
     here = pathlib.Path(__name__).parent.resolve()
     with zipfile.ZipFile("Contra (USA).zip", "r") as zip_file:
         zip_file.extractall(here)
