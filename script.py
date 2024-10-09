@@ -47,8 +47,6 @@ def get_dir_files(dir_url:str) -> list[str]:
 
 def download_file(files:list[str], directory:str):
     """downloads file from dir"""
-    if "ps" in directory:
-        directory = "psx"
     for _i, file in enumerate(files,0):
         command_str = f"wget -q -O {DIST}{directory}{file} {URL}/{directory}{file}".split(" ")
         if not DEBUG:
