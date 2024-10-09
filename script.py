@@ -14,7 +14,14 @@ URL = f"http://{SERVER}:{PORT}"
 
 DIST = "RetroPie/roms/"
 DEBUG = not True
-
+print(sys.argv)
+#if sys.argv[1] == "v":
+if "v" in sys.argv:
+    print("v in sys.arvg")
+    VERBOSE = True
+else:
+    VERBOSE = False
+    
 def test_connect():
     """tests connection"""
     _r = requests.get(URL, timeout=3)
@@ -87,12 +94,6 @@ def unzip_rom_file(file:str, dist:str):
 
 def main():
     """main"""
-    print(sys.argv)
-    #if sys.argv[1] == "v":
-    if "v" in sys.argv:
-        VERBOSE = True
-    else:
-        VERBOSE = False
     dirs = get_dirs()
     dirs.pop(dirs.index("zipped_roms/"))
 
