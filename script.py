@@ -14,11 +14,9 @@ URL = f"http://{SERVER}:{PORT}"
 
 DIST = "RetroPie/roms/"
 DEBUG = not True
-print(sys.argv)
-#if sys.argv[1] == "v":
 if "v" in sys.argv:
-    print("v in sys.arvg")
     VERBOSE = True
+    print("[WARNING] VERBOSE OUTPUT")
 else:
     VERBOSE = False
     
