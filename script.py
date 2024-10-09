@@ -88,8 +88,9 @@ def unzip_rom_file(file:str, dist:str):
 
 def main():
     """main"""
-    print(sys.argv[0])
-    if sys.argv[0] == "v":
+    print(sys.argv)
+    #if sys.argv[1] == "v":
+    if "v" in sys.argv:
         VERBOSE = True
     dirs = get_dirs()
     dirs.pop(dirs.index("zipped_roms/"))
