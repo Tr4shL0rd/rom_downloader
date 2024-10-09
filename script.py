@@ -92,7 +92,7 @@ def unzip_rom_file(file:str, dist:str):
 def main():
     """main"""
     dirs = get_dirs()
-    dirs.pop(dirs.index("zipped_roms/"))
+    dirs.pop(dirs.index("misc/"))
 
     choice = dir_choice(dirs)
     if choice <= len(dirs):
