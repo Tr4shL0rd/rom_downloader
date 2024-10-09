@@ -14,7 +14,6 @@ URL = f"http://{SERVER}:{PORT}"
 
 DIST = "RetroPie/roms/"
 DEBUG = not True
-VERBOSE = False
 
 def test_connect():
     """tests connection"""
@@ -92,6 +91,8 @@ def main():
     #if sys.argv[1] == "v":
     if "v" in sys.argv:
         VERBOSE = True
+    else:
+        VERBOSE = False
     dirs = get_dirs()
     dirs.pop(dirs.index("zipped_roms/"))
 
