@@ -49,6 +49,7 @@ def get_dir_files(dir_url:str) -> list[str]:
 
 def download_file(files:list[str], directory:str):
     """downloads file from dir"""
+    print(VERBOSE)
     for _i, file in enumerate(files,0):
         verbose_command_str = f"wget -O {DIST}{directory}{file} {URL}/{directory}{file}".split(" ")
         
