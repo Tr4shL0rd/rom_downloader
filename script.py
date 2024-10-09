@@ -1,4 +1,5 @@
 from __future__ import annotations
+import sys
 import os
 import zipfile
 import subprocess
@@ -13,6 +14,7 @@ URL = f"http://{SERVER}:{PORT}"
 
 DIST = "RetroPie/roms/"
 DEBUG = not True
+VERBOSE = False
 
 def test_connect():
     """tests connection"""
@@ -48,10 +50,15 @@ def get_dir_files(dir_url:str) -> list[str]:
 def download_file(files:list[str], directory:str):
     """downloads file from dir"""
     for _i, file in enumerate(files,0):
+        verbose_command_str = f"wget -O {DIST}{directory}{file} {URL}/{directory}{file}".split(" ")
+        
         command_str = f"wget -q -O {DIST}{directory}{file} {URL}/{directory}{file}".split(" ")
         if not DEBUG:
             print(f"[{_i}/{len(directory)}]", end="\r")
-            subprocess.run(command_str)
+            if VERBOSE:
+                subprocess.run(verbose_command_str)
+            else:
+                subprocess.run(command_str)
         else:
             print(command_str)
 
@@ -80,6 +87,8 @@ def unzip_rom_file(file:str, dist:str):
 
 def main():
     """main"""
+    if sys.argv[1] == "v":
+        VERBOSE = True
     dirs = get_dirs()
     dirs.pop(dirs.index("zipped_roms/"))
 
