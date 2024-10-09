@@ -1,6 +1,5 @@
 from __future__ import annotations
 import os
-import pathlib
 import zipfile
 import subprocess
 from bs4 import BeautifulSoup
@@ -48,6 +47,8 @@ def get_dir_files(dir_url:str) -> list[str]:
 
 def download_file(files:list[str], directory:str):
     """downloads file from dir"""
+    if "ps" in directory:
+        directory = "psx"
     for _i, file in enumerate(files,0):
         command_str = f"wget -q -O {DIST}{directory}{file} {URL}/{directory}{file}".split(" ")
         if not DEBUG:
@@ -62,9 +63,8 @@ def dir_choice(directories: list[str]) -> int:
     for index, _dir in enumerate(directories, 1):
         menu[index] = _dir
         print(f"[{index}]| {_dir}")
-
     _choice = int(input("Select a directory by number: ")) or None
-    if _choice >= index or _choice <= 1:
+    if _choice > index or _choice < 1:
         print(f"please select a valid number between 1 and {index}")
         dir_choice(directories)
     return None if isinstance(_choice, type(None)) else _choice-1
