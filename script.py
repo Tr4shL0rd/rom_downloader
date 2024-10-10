@@ -3,6 +3,7 @@ import sys
 import os
 import zipfile
 import subprocess
+import wget
 from bs4 import BeautifulSoup
 import requests
 from dotenv import load_dotenv
@@ -56,15 +57,14 @@ def get_dir_files(dir_url:str) -> list[str]:
 def download_file(files:list[str], directory:str):
     """downloads file from dir"""
     for _i, file in enumerate(files,0):
+        output = f"{DIST}{directory}{file}"
         verbose_command_str = f"wget -O {DIST}{directory}{file} {URL}/{directory}{file}".split(" ")
         
         command_str = f"wget -q -O {DIST}{directory}{file} {URL}/{directory}{file}".split(" ")
         if not DEBUG:
             print(f"[{_i}/{len(files)}]", end="\r")
-            if VERBOSE:
-                subprocess.run(verbose_command_str)
-            else:
-                subprocess.run(command_str)
+            wget.download(url=f"{URL}/{directory}{file}", out=output)
+            #subprocess.run(command_str)
         else:
             print(command_str)
 
