@@ -1,8 +1,6 @@
 from __future__ import annotations
-import sys
 import os
 import zipfile
-import subprocess
 import wget
 from bs4 import BeautifulSoup
 import requests
@@ -12,15 +10,8 @@ load_dotenv()
 SERVER = os.getenv("SERVER_IP")
 PORT = os.getenv("SERVER_PORT")
 URL = f"http://{SERVER}:{PORT}"
-
 DIST = "RetroPie/roms/"
-DEBUG = not True
-if "v" in sys.argv:
-    VERBOSE = True
-    print("[WARNING] VERBOSE OUTPUT")
-else:
-    VERBOSE = False
-    
+
 def test_connect():
     """tests connection"""
     _r = requests.get(URL, timeout=3)
@@ -37,7 +28,7 @@ def server_info():
     print(f"||SERVER PORT   : {PORT}")
     print(f"||URL           : {URL}")
     print("||==========================\n")
-    
+
 def get_dirs() -> list[str]:
     """returns only dirs from SERVER"""
     _r = requests.get(URL, timeout=3)
@@ -55,6 +46,7 @@ def get_dir_files(dir_url:str) -> list[str]:
     return _files
 
 def bar_custom(current, total, width=80):
+    """custom bar for wget"""
     current_mb = current / (1024 * 1024)
     total_mb = total / (1024 * 1024)
     percentage = (current / total) * 100
@@ -70,6 +62,7 @@ def download_file(files:list[str], directory:str):
 def dir_choice(directories: list[str]) -> int:
     """dir selection"""
     menu = {}
+    index = 0
     for index, _dir in enumerate(directories, 1):
         menu[index] = _dir
         print(f"[{index}]| {_dir}")
@@ -79,6 +72,7 @@ def dir_choice(directories: list[str]) -> int:
         return -1
     else:
         _choice = int(_choice)
+
     if _choice > index or _choice < 1:
         print(f"please select a valid number between 1 and {index}")
         dir_choice(directories)
@@ -114,18 +108,6 @@ def bulk_download(dirs: list[str]) -> None:
     print("Bulk download complete.")
 
 
-#def bulk_download(dirs:list[str]):
-#    print(dirs)
-#    for dir in dirs:
-
-        #for file in get_dir_files(f"{URL}/{dir}"):
-        #    print(f"{dir = }")
-        #    print(f"{URL}/{dir}{file}")
-        #    cmd_str = f"wget -q -O {DIST}{dir}{file} {URL}/{dir}{file}".split(" ")
-        #print(dir)
-        #print(download_file(get_dir_files(dir)))
-        #download_file(get_dir_files(dir))
-    
 
 def main():
     """main"""
