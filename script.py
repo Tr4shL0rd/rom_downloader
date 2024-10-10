@@ -20,6 +20,7 @@ def test_connect():
 def clear(n:int) -> None:
     """clears screen by `n` (`int`) lines"""
     print("\n"*n)
+    server_info()
 
 
 def server_info():
