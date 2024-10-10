@@ -59,7 +59,7 @@ def download_file(files:list[str], directory:str):
     for file in files:
 
         output = f"{DIST}{directory}{file}"
-        if os.path.exists(output):
+        if os.path.exists(output): # skips file if already downloaded
             continue
         wget.download(url=f"{URL}/{directory}{file}", out=output, bar=bar_custom)
     print() # newline for after downloading
