@@ -57,7 +57,10 @@ def bar_custom(current, total, width=80):
 def download_file(files:list[str], directory:str):
     """downloads file from dir"""
     for file in files:
+
         output = f"{DIST}{directory}{file}"
+        if os.path.exists(output):
+            continue
         wget.download(url=f"{URL}/{directory}{file}", out=output, bar=bar_custom)
     print() # newline for after downloading
 
