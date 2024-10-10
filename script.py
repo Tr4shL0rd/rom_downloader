@@ -7,11 +7,11 @@ import requests
 from dotenv import load_dotenv
 load_dotenv()
 
-SERVER = os.getenv("SERVER_IP")
-PORT = os.getenv("SERVER_PORT")
-URL = f"http://{SERVER}:{PORT}"
-DIST = "RetroPie/roms/"
-
+SERVER          = os.getenv("SERVER_IP")
+PORT            = os.getenv("SERVER_PORT")
+URL             = f"http://{SERVER}:{PORT}"
+DIST            = "RetroPie/roms/"
+TERMINAL_HEIGHT = os.get_terminal_size().lines
 def test_connect():
     """tests connection"""
     _r = requests.get(URL, timeout=3)
@@ -20,6 +20,7 @@ def test_connect():
 def clear(n:int) -> None:
     """clears screen by `n` (`int`) lines"""
     print("\n"*n)
+
 
 def server_info():
     """displays server info"""
@@ -71,10 +72,20 @@ def dir_choice(directories: list[str]) -> int:
     _choice = input("Select a directory by number: ").lower() or None
     if _choice == "all" or _choice == "a":
         return -1
+    elif isinstance(_choice, type(None)):
+        clear(TERMINAL_HEIGHT)
+        dir_choice(directories)
     else:
-        _choice = int(_choice)
+        try:
+            _choice = int(_choice)
+        except ValueError:
+            clear(TERMINAL_HEIGHT)
+            print(f"did not recognize \"{_choice}\" as a valid option.\nTry again.")
+            dir_choice(directories)
+
 
     if _choice > index or _choice < 1:
+        clear(TERMINAL_HEIGHT)
         print(f"please select a valid number between 1 and {index}")
         dir_choice(directories)
 
