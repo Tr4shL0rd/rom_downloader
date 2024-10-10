@@ -58,7 +58,7 @@ def download_file(files:list[str], directory:str):
         
         command_str = f"wget -q -O {DIST}{directory}{file} {URL}/{directory}{file}".split(" ")
         if not DEBUG:
-            print(f"[{_i}/{len(directory)}]", end="\r")
+            print(f"[{_i}/{len(files)}]", end="\r")
             if VERBOSE:
                 subprocess.run(verbose_command_str)
             else:
@@ -76,11 +76,13 @@ def dir_choice(directories: list[str]) -> int:
     if _choice > index or _choice < 1:
         print(f"please select a valid number between 1 and {index}")
         dir_choice(directories)
+
     if directories[_choice-1] == "psx/":
         print("[WARNING] PSX DOES NOT WORK IN THE ARCADE")
         yn_choice = input("continue? [y/N]: ").lower() or "n"
         if yn_choice == "n":
             return None
+
     return None if isinstance(_choice, type(None)) else _choice-1
 
 def unzip_rom_file(file:str, dist:str):
