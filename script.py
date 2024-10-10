@@ -46,7 +46,7 @@ def get_dir_files(dir_url:str) -> list[str]:
     _files = [a['href'] for a in _soup.find_all('a', href=True) if not a['href'].endswith('/')]
     return _files
 
-def bar_custom(current, total):
+def bar_custom(current, total, width=80):
     """custom bar for wget"""
     current_mb = current / (1024 * 1024)
     total_mb = total / (1024 * 1024)
