@@ -58,16 +58,9 @@ def download_file(files:list[str], directory:str):
     """downloads file from dir"""
     for _i, file in enumerate(files,0):
         output = f"{DIST}{directory}{file}"
-        verbose_command_str = f"wget -O {DIST}{directory}{file} {URL}/{directory}{file}".split(" ")
+        #print(f"[{_i}/{len(files)}]", end="\r")
+        wget.download(url=f"{URL}/{directory}{file}", out=output)
         
-        command_str = f"wget -q -O {DIST}{directory}{file} {URL}/{directory}{file}".split(" ")
-        if not DEBUG:
-            print(f"[{_i}/{len(files)}]", end="\r")
-            wget.download(url=f"{URL}/{directory}{file}", out=output)
-            #subprocess.run(command_str)
-        else:
-            print(command_str)
-
 def dir_choice(directories: list[str]) -> int:
     """dir selection"""
     menu = {}
