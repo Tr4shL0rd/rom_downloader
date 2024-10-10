@@ -54,13 +54,16 @@ def get_dir_files(dir_url:str) -> list[str]:
     _files = [a['href'] for a in _soup.find_all('a', href=True) if not a['href'].endswith('/')]
     return _files
 
+def bar_custom(current, total, width=80):
+    print("Downloading: %d%% [%d / %d] Ks" % (current / total * 100, current / 1000, total / 1000), end='\r')
+
 def download_file(files:list[str], directory:str):
     """downloads file from dir"""
-    for _i, file in enumerate(files,0):
+    for file in files:
         output = f"{DIST}{directory}{file}"
-        #print(f"[{_i}/{len(files)}]", end="\r")
-        wget.download(url=f"{URL}/{directory}{file}", out=output)
-        
+        wget.download(url=f"{URL}/{directory}{file}", out=output, bar=bar_custom)
+    print() # newline for after downloading
+
 def dir_choice(directories: list[str]) -> int:
     """dir selection"""
     menu = {}
