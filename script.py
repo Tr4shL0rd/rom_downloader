@@ -74,7 +74,12 @@ def dir_choice(directories: list[str]) -> int:
     for index, _dir in enumerate(directories, 1):
         menu[index] = _dir
         print(f"[{index}]| {_dir}")
-    _choice = int(input("Select a directory by number: ")) or None
+    print("[all] download all ROMs")
+    _choice = input("Select a directory by number: ") or None
+    if _choice == "all":
+        return -1
+    else:
+        _choice = int(_choice)
     if _choice > index or _choice < 1:
         print(f"please select a valid number between 1 and {index}")
         dir_choice(directories)
@@ -92,17 +97,46 @@ def unzip_rom_file(file:str, dist:str):
     unzips `file` (`str`) to `dist` (`str`)
     * note: `dist` also means the console that the rom file is for
     """
-    #                   __file__
-    #here = pathlib.Path(__name__).parent.resolve()
     with zipfile.ZipFile(file, "r") as zip_file:
         zip_file.extractall(dist)
 
+def bulk_download(dirs: list[str]) -> None:
+    """
+    Downloads all files from the provided directories.
+    """
+    for dir in dirs:
+        print(f"Downloading files from: {dir}")
+        files = get_dir_files(dir)  # Get files in the directory
+        if files:
+            download_file(files, dir)  # Download the files
+        else:
+            print(f"No files found in {dir}")
+
+    print("Bulk download complete.")
+
+
+#def bulk_download(dirs:list[str]):
+#    print(dirs)
+#    for dir in dirs:
+
+        #for file in get_dir_files(f"{URL}/{dir}"):
+        #    print(f"{dir = }")
+        #    print(f"{URL}/{dir}{file}")
+        #    cmd_str = f"wget -q -O {DIST}{dir}{file} {URL}/{dir}{file}".split(" ")
+        #print(dir)
+        #print(download_file(get_dir_files(dir)))
+        #download_file(get_dir_files(dir))
+    
 
 def main():
     """main"""
     dirs = get_dirs()
 
     choice = dir_choice(dirs)
+    if choice == -1:
+        print("downloading all")
+        bulk_download(get_dirs())
+        return
     if choice <= len(dirs):
         print(f"show files in \"{get_dirs()[choice].replace('/','')}\"?", end="")
         if input(" [y/N] ").lower() == "y":
