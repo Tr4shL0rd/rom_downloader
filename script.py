@@ -55,7 +55,10 @@ def get_dir_files(dir_url:str) -> list[str]:
     return _files
 
 def bar_custom(current, total, width=80):
-    print("Downloading: %d%% [%d / %d] Ks" % (current / total * 100, current / 1000, total / 1000), end='\r')
+    current_mb = current / (1024 * 1024)
+    total_mb = total / (1024 * 1024)
+    percentage = (current / total) * 100
+    print("Downloading: %.2f%% [%.2f / %.2f MB]" % (percentage, current_mb, total_mb), end='\r')
 
 def download_file(files:list[str], directory:str):
     """downloads file from dir"""
