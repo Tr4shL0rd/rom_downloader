@@ -42,6 +42,8 @@ def get_dirs() -> list[str]:
     _r = requests.get(URL, timeout=3)
     _soup = BeautifulSoup(_r.text, 'html.parser')
     _dirs = [a['href'] for a in _soup.find_all('a', href=True) if a['href'].endswith('/')]
+
+    _dirs.pop(_dirs.index("misc/"))
     return _dirs
 
 def get_dir_files(dir_url:str) -> list[str]:
@@ -99,7 +101,6 @@ def unzip_rom_file(file:str, dist:str):
 def main():
     """main"""
     dirs = get_dirs()
-    dirs.pop(dirs.index("misc/"))
 
     choice = dir_choice(dirs)
     if choice <= len(dirs):
