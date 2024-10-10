@@ -36,7 +36,6 @@ def get_dirs() -> list[str]:
     _r = requests.get(URL, timeout=3)
     _soup = BeautifulSoup(_r.text, 'html.parser')
     _dirs = [a['href'] for a in _soup.find_all('a', href=True) if a['href'].endswith('/')]
-
     _dirs.pop(_dirs.index("misc/"))
     return _dirs
 
@@ -47,7 +46,7 @@ def get_dir_files(dir_url:str) -> list[str]:
     _files = [a['href'] for a in _soup.find_all('a', href=True) if not a['href'].endswith('/')]
     return _files
 
-def bar_custom(current, total, width=80):
+def bar_custom(current, total):
     """custom bar for wget"""
     current_mb = current / (1024 * 1024)
     total_mb = total / (1024 * 1024)
@@ -70,10 +69,10 @@ def dir_choice(directories: list[str]) -> int:
         print(f"[{index}]| {_dir}")
 
     print("[A]| Download all ROMs")
-    _choice = input("Select a directory by number: ").lower() or None
+    _choice = input(f"Select a directory by number [1-{index}]: ").lower() or None
     if _choice == "all" or _choice == "a":
         return -1
-    elif isinstance(_choice, type(None)):
+    elif isinstance(_choice, type(None)): # no input given
         clear(TERMINAL_HEIGHT)
         dir_choice(directories)
     else:
@@ -91,7 +90,7 @@ def dir_choice(directories: list[str]) -> int:
         dir_choice(directories)
 
     if directories[_choice-1] == "psx/":
-        print("[WARNING] PSX DOES NOT WORK IN THE ARCADE")
+        print("[WARNING] PSX DOES NOT WORK ON THE ARCADE")
         yn_choice = input("continue? [y/N]: ").lower() or "n"
         if yn_choice == "n":
             return None
@@ -110,13 +109,13 @@ def bulk_download(dirs: list[str]) -> None:
     """
     Downloads all files from the provided directories.
     """
-    for dir in dirs:
-        print(f"Downloading files from: {dir}")
-        files = get_dir_files(dir)  # Get files in the directory
+    for _dir in dirs:
+        print(f"Downloading files from: {_dir}")
+        files = get_dir_files(_dir)  # Get files in the directory
         if files:
-            download_file(files, dir)  # Download the files
+            download_file(files, _dir)  # Download the files
         else:
-            print(f"No files found in {dir}")
+            print(f"No files found in {_dir}")
 
     print("Bulk download complete.")
 
