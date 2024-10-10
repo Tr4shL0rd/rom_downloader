@@ -66,9 +66,10 @@ def dir_choice(directories: list[str]) -> int:
     for index, _dir in enumerate(directories, 1):
         menu[index] = _dir
         print(f"[{index}]| {_dir}")
-    print("[all] download all ROMs")
-    _choice = input("Select a directory by number: ") or None
-    if _choice == "all":
+
+    print("[A]| Download all ROMs")
+    _choice = input("Select a directory by number: ").lower() or None
+    if _choice == "all" or _choice == "a":
         return -1
     else:
         _choice = int(_choice)
