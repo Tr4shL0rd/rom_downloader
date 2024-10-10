@@ -58,7 +58,7 @@ def bar_custom(current, total, width=80):
     current_mb = current / (1024 * 1024)
     total_mb = total / (1024 * 1024)
     percentage = (current / total) * 100
-    print("Downloading: %.2f%% [%.2f / %.2f MB]" % (percentage, current_mb, total_mb), end='\r')
+    print(f"Downloading: {percentage}% [{current_mb} / {total_mb} MB]", end='\r')
 
 def download_file(files:list[str], directory:str):
     """downloads file from dir"""
