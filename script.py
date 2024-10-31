@@ -151,7 +151,6 @@ if __name__ == "__main__":
                 raise FileNotFoundError
             else:
                 clear(10)
-        server_info()
         main()
     except KeyboardInterrupt:
         print("\n")
