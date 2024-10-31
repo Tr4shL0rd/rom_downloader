@@ -1,0 +1,53 @@
+SUPPORTED ,SYSTEM                              ,YEAR ,ROM_EXTENSIONS                                              ,BIOS
+X         ,3do                                 ,1993 ,.iso                                                        ,panafz10.bin
+-         ,Amiga                               ,1985 ,.adf                                                        ,"kick13.rom,kick20.rom,kick31.rom"
+-         ,Amstrad CPC                         ,1984 ,.dsk .cpc                                                   ,-
+-         ,Apple II                            ,1977 ,.dsk                                                        ,-
+-         ,Atari 2600                          ,1977 ,.bin .a26 .rom                                              ,-
+-         ,"Atari 5200, 8 bit"                 ,1982 ,.a52 .bas .bin .xex .atr .xfd .dcm .atr.gz .xfd.gz          ,"ATARIXL.ROM, ATARIBAS.ROM, ATARIOSA.ROM, ATARIOSB.ROM, 5200.rom"
+X         ,Atari 7800                          ,1986 ,.a78 .bin                                                   ,7800 BIOS (U).rom (Optional)
+X         ,Atari Jaguar                        ,1993 ,.j64 .jag                                                   ,-
+-         ,Atari Lynx                          ,1989 ,.lnx                                                        ,-
+X         ,"Atari ST, STE, TT, Falcon"         ,1985 ,.st .stx .img .rom .raw .ipf .ctr                           ,-
+-         ,Colecovision                        ,1982 ,.bin .col .rom .zip                                         ,coleco.rom
+X         ,Color Computer                      ,1980 ,.cas .wav .bas .asc .dmk .jvc .os9 .dsk .vdk .rom .ccc .sna ,bas13.rom
+-         ,Commodore 64                        ,1982 ,.crt .d64 .g64 .t64 .tap .x64                               ,-
+-         ,Dragon 32                           ,1982 ,.cas .wav .bas .asc .dmk .jvc .os9 .dsk .vdk .rom .ccc .sna ,d32.rom
+-         ,Dreamcast                           ,1998 ,.cdi .gdi                                                   ,"dc_boot.bin, dc_flash.bin"
+X         ,Game Boy Advance                    ,2001 ,.gba                                                        ,gba_bios.bin
+X         ,GameCube                            ,2001 ,.iso                                                        ,-
+-         ,Game Gear                           ,1990 ,.gg                                                         ,-
+X         ,Game Boy                            ,1989 ,.gb                                                         ,-
+-         ,Game Boy Color                      ,1998 ,.gbc                                                        ,-
+X         ,Genesis/Megadrive                   ,1988 ,.smd .bin .md .iso                                          ,-
+-         ,Intellivision                       ,1979 ,.int .bin                                                   ,"exec.bin, grom.bin"
+-         ,Macintosh                           ,1984 ,.img .rom                                                   ,"mac.rom, disk.img"
+-         ,MAME                                ,1997 ,.zip                                                        ,neogeo.zip
+X         ,Master System                       ,1985 ,.sms                                                        ,-
+-         ,MSX                                 ,1983 ,.rom .mx1 .mx2 .col .dsk                                    ,-
+X         ,Neo Geo                             ,1990 ,.zip                                                        ,neogeo.zip
+X         ,Neo Geo Pocket                      ,1998 ,.ngp                                                        ,-
+X         ,Neo Geo Pocket Color                ,1999 ,.ngc                                                        ,-
+X         ,Nintendo 64                         ,1996 ,.z64 .n64 .v64                                              ,-
+X         ,Nintendo DS                         ,2004 ,.nds .bin                                                   ,-
+-         ,Nintendo Entertainment System       ,1983 ,.zip .nes .smc .sfc .fig .swc .mgd                          ,disksys.rom (for famicom games)
+X         ,Oric                                ,1983 ,.dsk .tap                                                   ,-
+X         ,PC                                  ,1981 ,.com .sh .bat .exe                                          ,-
+X         ,PC Engine/TurboGrafx-16             ,1987 ,.pce                                                        ,syscard3.pce
+X         ,PlayStation 1                       ,1994 ,.bin .cue .img .mdf                                         ,"scph1001.bin, or scph5500.bin, scph5501.bin, scph5502.bin"
+X         ,PlayStation 2                       ,2000 ,.iso .img .bin .mdf .z .z2 .bz2 .dump .cso .ima .gz         ,-
+-         ,PSP                                 ,2004 ,.bin .cue .cbn .img .iso .m3u .mdf .pbp .toc .z .znx        ,-
+X         ,SAM Coupé                           ,1989 ,.dsk .mgt .sbt .sad                                         ,-
+X         ,Sega 32X                            ,1994 ,.32x .smd .bin .md                                          ,-
+X         ,Sega CD                             ,1991 ,.smd .bin .md .iso                                          ,"us_scd1_9210.bin, eu_mcd1_9210.bin, jp_mcd1_9112.bin, or bios_CD_U.bin, bios_CD_E.bin, bios_CD_J.bin"
+X         ,Sega SG-1000                        ,1983 ,.sg .zip                                                    ,-
+-         ,Super Nintendo Entertainment System ,1990 ,.zip .smc .sfc .fig .swc                                    ,-
+-         ,TI-99/4A                            ,1981 ,.ctg                                                        ,TI-994A.ctg
+X         ,TRS-80                              ,1977 ,.dsk                                                        ,level2.rom
+X         ,Vectrex                             ,1982 ,.vec .gam .bin                                              ,-
+X         ,Videopac/Odyssey 2                  ,1983 ,.bin                                                        ,o2rom.bin
+-         ,Virtual Boy                         ,1995 ,.vb                                                         ,-
+X         ,Wii                                 ,2006 ,.iso                                                        ,-
+-         ,Wonderswan                          ,1999 ,.ws                                                         ,-
+X         ,Wonderswan Color                    ,2000 ,.wsc                                                        ,-
+-         ,ZX Spectrum                         ,1982 ,sna .szx .z80 .tap .tzx .gz .udi .mgt .img .trd .scl .dsk   ,-
