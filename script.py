@@ -75,8 +75,12 @@ def dir_choice(directories: list[str]) -> int:
 
     print("[A]| Download all ROMs")
     _choice = input(f"Select a directory by number [1-{index}]: ").lower() or None
+    exits = ["q", "quit", "exit", "leave", "stop", "x"]
     if _choice == "all" or _choice == "a":
         return -1
+    elif _choice in exits:
+        print("exiting program...")
+        exit()
     elif isinstance(_choice, type(None)): # no input given
         clear(TERMINAL_HEIGHT)
         dir_choice(directories)
