@@ -5,12 +5,16 @@ import wget
 from bs4 import BeautifulSoup
 import requests
 from dotenv import load_dotenv
+from pathlib import Path
 load_dotenv()
 
 SERVER          = os.getenv("SERVER_IP")
 PORT            = os.getenv("SERVER_PORT")
 URL             = f"http://{SERVER}:{PORT}"
-DIST            = "RetroPie/roms/"
+HOME            = Path.home()
+RETROPIE_ROMS   = "RetroPie/roms/"
+DIST            = os.path.join(HOME,RETROPIE_ROMS)
+
 TERMINAL_HEIGHT = os.get_terminal_size().lines
 def test_connect():
     """tests connection"""
@@ -65,7 +69,7 @@ def download_file(files:list[str], directory:str):
         wget.download(url=f"{URL}/{directory}{file}", out=output, bar=bar_custom)
     print() # newline for after downloading
 
-def dir_choice(directories: list[str]) -> int:
+def dir_choice(directories: list[str]) -> int | None:
     """dir selection"""
     menu = {}
     index = 0
@@ -92,19 +96,23 @@ def dir_choice(directories: list[str]) -> int:
             print(f"did not recognize \"{_choice}\" as a valid option.\nTry again.")
             dir_choice(directories)
 
+    if isinstance(_choice, int):
+        if _choice > index or _choice < 1:
+            clear(TERMINAL_HEIGHT)
+            print(f"please select a valid number between 1 and {index}")
+            dir_choice(directories)
 
-    if _choice > index or _choice < 1:
-        clear(TERMINAL_HEIGHT)
-        print(f"please select a valid number between 1 and {index}")
-        dir_choice(directories)
+        if directories[_choice-1] == "psx/":
+            print("[WARNING] PSX DOES NOT WORK ON THE ARCADE")
+            yn_choice = input("continue? [y/N]: ").lower() or "n"
+            if yn_choice == "n":
+                return None
 
-    if directories[_choice-1] == "psx/":
-        print("[WARNING] PSX DOES NOT WORK ON THE ARCADE")
-        yn_choice = input("continue? [y/N]: ").lower() or "n"
-        if yn_choice == "n":
-            return None
-
-    return None if isinstance(_choice, type(None)) else _choice-1
+    if isinstance(_choice, type(None)):
+        return None
+    elif isinstance(_choice, int):
+        return _choice-1
+    #return None if isinstance(_choice, type(None)) else _choice-1 
 
 def unzip_rom_file(file:str, dist:str):
     """
@@ -148,7 +156,7 @@ def main():
 if __name__ == "__main__":
     try:
         test_connect()
-        if not os.path.exists(DIST):
+        if os.path.exists(DIST) == False:
             print(f"[WARNING] Path \"{DIST}\" not found!")
             continued = input("continue? [y/N] ").lower() or "n"
             if continued == "n":
